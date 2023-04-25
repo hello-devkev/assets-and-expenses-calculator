@@ -27,54 +27,24 @@
     <div class="container">
         <div class="row row-content align-items-center">
             <div class="col-sm-4 order-sm-last col-md-3">
-                <h2 class="text-sm-right">Discover </h2>
-            </div>
-            <div class="col">
-                <div class="media">
-                    <img class="d-flex mr-3 img-thumbnail" src="" alt="" />
-                    <div class="media-body align-self-center">
-                        <h3>Our Campsites</h3>
-                        <p class="d-none d-sm-block">Explore our growing database of curated campsites and leave your own reviews!</p>
-                    </div>
-                </div>
+                <h2 class="text-sm-left">Discover</h2>
             </div>
         </div>
 
         <form class="needs-validation" novalidate>
             <div class="form-row">
-              <div class="col-md-4 mb-3">
-                <label for="validationCustom01">First name</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="validationCustom02">Last name</label>
-                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="validationCustomUsername">Username</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                  </div>
-                  <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
-                  <div class="invalid-feedback">
-                    Please choose a username.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="col-md-6 mb-3">
-                <label for="validationCustom03">City</label>
-                <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+              <div class="col-md-3 mb-3">
+                <label for="txt_wage">Hourly Wage</label>
+                <input type="text" class="form-control" id="txt_wage" value="0.00" placeholder="Hourly Wage" required>
                 <div class="invalid-feedback">
-                  Please provide a valid city.
+                  Please provide a valid number.
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="txt_hours">Hours Per Week</label>
+                <input type="text" class="form-control" id="txt_hours" value="0.00" placeholder="Hours Per Week" required>
+                <div class="invalid-feedback">
+                  Please provide a valid number.
                 </div>
               </div>
               <div class="col-md-3 mb-3">
@@ -85,21 +55,25 @@
                 </div>
               </div>
               <div class="col-md-3 mb-3">
-                <label for="validationCustom05">Zip</label>
-                <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+                <label for="validationCustom05">Hourly Wage ($)</label>
+                <input type="text" class="form-control" id="validationCustom05" placeholder="Hourly Wage" required>
                 <div class="invalid-feedback">
-                  Please provide a valid zip.
+                  Please provide a valid number.
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary" type="submit">Submit form</button>
+            <button class="btn btn-primary" type="submit" value="calculate" onclick="calcSalary()">Calculate</button>
+            <br>
+            <br>
+            <h3 id="results"></h3>
           </form>
     
     
     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
+    
+    <script src="script.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
