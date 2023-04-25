@@ -7,3 +7,4 @@ A simple web application with field inputs for numerical values. Calculates sala
 
 Changelog: 
 04/22/2023: Set-up original files and added functions to calculate adjusted total salary based on hourly wages.
+04/24/2023: Added script file and simple calculation function for hourly wage and number of hours.
