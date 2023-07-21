@@ -30,11 +30,11 @@
                 <h2 class="text-sm-left">Discover</h2>
             </div>
         </div>
-
+        <br>
         <form class="needs-validation" novalidate>
             <div class="form-row">
               <div class="col-md-3 mb-3">
-                <label for="txt_wage">Hourly Wage</label>
+                <label for="txt_wage">Hourly Wage ($)</label>
                 <input type="text" class="form-control" id="txt_wage" value="0.00" placeholder="Hourly Wage" required>
                 <div class="invalid-feedback">
                   Please provide a valid number.
@@ -50,19 +50,15 @@
               <div class="col-md-3 mb-3">
                 <label for="validationCustom04">State</label>
                 <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
-                <div class="invalid-feedback">
-                  Please provide a valid state.
-                </div>
               </div>
               <div class="col-md-3 mb-3">
                 <label for="validationCustom05">Hourly Wage ($)</label>
                 <input type="text" class="form-control" id="validationCustom05" placeholder="Hourly Wage" required>
-                <div class="invalid-feedback">
-                  Please provide a valid number.
-                </div>
               </div>
             </div>
+            <br>
             <button class="btn btn-primary" type="submit" value="calculate" onclick="calcSalary()">Calculate</button>
+            <button class="btn btn-secondary" type="submit" value="reset" onclick="reset()">Reset</button>
             <br>
             <br>
             <h3 id="results"></h3>
