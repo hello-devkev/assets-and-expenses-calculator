@@ -1,95 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
 
-    <!-- Stylesheet CSS -->
-    <link rel="stylesheet" href="css/style.css" />
+  <!-- Stylesheet CSS -->
+  <link rel="stylesheet" href="css/style.css" />
 
-    <title>Assets & Expenses Calculator</title>
+  <title>Assets & Expenses Calculator</title>
 </head>
 
 <body>
     <header class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h1 class="align-text-center">Salary Calculator</h1>
-                </div>
-            </div>
-        </div>
+      <div class="container text-center">
+        <h1>2023 California Salary Calculator</h1>
+      </div>
     </header>
     <div class="container">
-        <div class="row row-content align-items-center">
-            <div class="col-sm-4 order-sm-last col-md-3">
-                <h2 class="text-sm-left">Discover</h2>
-            </div>
+      <div class="row justify-content-center">
+        <div class="col-md-3 mb-3">
+          <h2 class="text-sm-left">Calculate:</h2>
         </div>
-        <br>
-        <form class="needs-validation" novalidate>
-            <div class="form-row">
-              <div class="col-md-3 mb-3">
-                <label for="txt_wage">Hourly Wage ($)</label>
-                <input type="text" class="form-control" id="txt_wage" value="0.00" placeholder="Hourly Wage" required>
-                <div class="invalid-feedback">
-                  Please provide a valid number.
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="txt_hours">Hours Per Week</label>
-                <input type="text" class="form-control" id="txt_hours" value="0.00" placeholder="Hours Per Week" required>
-                <div class="invalid-feedback">
-                  Please provide a valid number.
-                </div>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="validationCustom04">State</label>
-                <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
-              </div>
-              <div class="col-md-3 mb-3">
-                <label for="validationCustom05">Hourly Wage ($)</label>
-                <input type="text" class="form-control" id="validationCustom05" placeholder="Hourly Wage" required>
-              </div>
-            </div>
-            <br>
-            <button class="btn btn-primary" type="submit" value="calculate" onclick="calcSalary()">Calculate</button>
-            <button class="btn btn-secondary" type="submit" value="reset" onclick="reset()">Reset</button>
-            <br>
-            <br>
-            <h3 id="results"></h3>
-          </form>
-    
-    
+        <div class="col-md-3 mb-3">
+          <label for="txt_wage">Hourly Wage ($):</label>
+          <input type="number" class="form-control" id="txt_wage" value="0.00" placeholder="Hourly Wage" required>
+          <div class="invalid-feedback" id="wageError">
+            Please provide a valid number.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="txt_hours">Hours Per Week:</label>
+          <input type="number" class="form-control" id="txt_hours" value="0.00" placeholder="Hours Per Week" required>
+          <div class="invalid-feedback" id="hoursError">
+            Please provide a valid number.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="select">Filing Status:</label>
+          <select class="custom-select" id="select" required>
+            <option selected>Select</option>
+            <option value="single">Single/Married Filing Separately</option>
+            <option value="married">Married Filing Jointly/Widowed</option>
+            <option value="head">Head of Household</option>
+          </select>
+          <div class="invalid-feedback" id="selectError">
+            Please select a filing status.
+          </div>
+        </div>
+      </div>
+  
+      <div class="row justify-content-center">
+        <div class="col-md-3 mb-3">
+          <button class="btn btn-primary btn-block" type="button" value="calculate" onclick="validateAndCalc()">Calculate</button>
+        </div>
+        <div class="col-md-3 mb-3">
+          <button class="btn btn-success btn-block" onclick="exportToCSV()">Export</button>
+        </div>
+        <div class="col-md-3 mb-3">
+          <button class="btn btn-secondary btn-block" onclick="resetForm()">Reset</button>
+        </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h2>Annual Salary:</h2>
+          <h3 id="results"></h3>
+        </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h2>Adjusted Salary (State Tax)</h2>
+          <h3 id="adjustedresults"></h3>
+        </div>
+      </div>
+  
+    </div>
+
+
     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    
+
     <script src="script.js"></script>
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-          'use strict';
-          window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-              form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-              }, false);
-            });
-          }, false);
-        })();
-        </script>
 </body>
 
 </html>
